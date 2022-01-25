@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'website/authentication/style.css' %}">
+</head>
+<body>
+    <div class="container right-panel-active">
+	<!-- Sign Up -->
+	<div class="container__form container--signup">
+		<form class="form" id="form1" method="POST">
+			{% csrf_token %}
+			<h2 class="form__title">Sign Up</h2>
+			<input type="text" placeholder="Nom" class="input" name="name" />
+			<input type="email" placeholder="E-mail" class="input" name="email" />
+			<input type="password" placeholder="Mot de passe" class="input" name="password" />
+			{% if error %}
+				{{error}}
+			{% endif %}
+			<button type="submit" class="btn">Sign Up</button>
+		</form>
+	</div>
+
+	<!-- Sign In -->
+	<div class="container__form container--signin">
+		<form class="form" id="form2" method="POST">
+			{% csrf_token %}
+			<h2 class="form__title">Sign In</h2>
+			<input type="email" placeholder="E-mail" class="input" name="login_email"/>
+			<input type="password" placeholder="Mot de passe" class="input" name="login_password" />
+			{% if error2 %}
+				<small style="color: red;">
+					{{error2}}
+				</small>
+
+			{% endif %}
+			<a href="#" class="link">Mot de passe oublié?</a>
+			<button class="btn">Sign In</button>
+		</form>
+	</div>
+
+	<!-- Overlay -->
+	<div class="container__overlay">
+		<div class="overlay">
+			<div class="overlay__panel overlay--left">
+				<button class="btn" id="signIn">Sign In</button>
+			</div>
+			<div class="overlay__panel overlay--right">
+				<button class="btn" id="signUp">Sign Up</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="{% static 'website/authentication/apps.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{% extends 'website/home.html' %}
+
+{% block content %}
+    {% for post in posts %}
+        {% if post.published %}
+                <div class="container-fluid">
+                    <div class="jumbotron">
+                        <article>
+                            <center>
+                                <h2>{{post.title}}</h2>
+                            </center>
+                            <p>{{post.content|safe|truncatewords:50}}</p>
+                            <h6>Publié par <i>{{post.author.name}}</i> le {{post.created_on|date:'j F Y'}}</h6>
+                            <p>
+                                <a class="btn btn-lg btn-primary" href="{% url 'blog:blog_detail' pk=post.id %}" role="button">Lire la suite &raquo;</a>
+                            </p>
+                        </article>
+                    </div>
+                </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Mon site</title>
+    <link rel="stylesheet" href="{% static 'website/home/style.css' %}">
+    <script src="https://kit.fontawesome.com/bea45e3389.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div class="sidebar-container">
+  <div class="sidebar-logo">
+    Blog Voyage
+  </div>
+  <ul class="sidebar-navigation">
+    <li class="header">Accueil</li>
+    <li>
+      <a href="{% url 'blog:blog_list' %}">
+        <i class="fa fa-home" aria-hidden="true"></i> Articles
+      </a>
+    </li>
+    {% if user.is_staff %}
+    <li>
+      <a href="/jl_admin">
+        <i class="fa fa-tachometer" aria-hidden="true"></i> Administration
+      </a>
+    </li>
+    {% endif %}
+    <li class="header">Mon Compte</li>
+    <li>
+      <a href="#">
+        <i class="fa fa-users" aria-hidden="true"></i> Profil Personnel
+      </a>
+    </li>
+    {% if user.is_admin %}
+    <li>
+      <a href="{% url 'blog:published' %}">
+        <i class="fa fa-users" aria-hidden="true"></i> Mes articles publiés
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'blog:none_published' %}">
+        <i class="fa fa-users" aria-hidden="true"></i> Mes articles non publiés
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'blog:blog_create' %}">
+        <i class="fa fa-cog" aria-hidden="true"></i> Créer un article
+      </a>
+    </li>
+    {% endif %}
+    <li>
+      <a href="{% url 'logout' %}">
+        <i class="fa fa-info-circle" aria-hidden="true"></i> Déconnexion
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div class="content-container">
+
+
+{% block content %}
+  <div class="container-fluid">
+
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+
+      <h1>Bienvenu sur mon site</h1>
+      <p>Mon site est encore en construction.</p>
+      <h4>Revenez plus tard!!!.</h4>
+      <p>
+        <a class="btn btn-lg btn-primary" href="#" role="button">Visitez mon blog voyage &raquo;</a>
+      </p>
+
+    </div>
+
+  </div>
+   {% endblock %}
+
+</div>
+
+</body>
+</html>
