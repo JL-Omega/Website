@@ -11,4 +11,6 @@ urlpatterns = [
     path('none_published/', login_required(views.NonePublished.as_view()), name='none_published'),
     path('published/', login_required(views.Published.as_view()), name='published'),
     path('blog_create/', login_required(views.CreatePost), name='blog_create'),
+    path('blog_edit_<str:pk>/', login_required(views.updatePost), name='blog_edit'),
+    path('blog_delete_<str:pk>/', login_required(views.deletePost), name='blog_delete'),
 ]

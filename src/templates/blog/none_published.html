@@ -13,8 +13,8 @@
                             <h6>Rédigé par <i>{{post.author.name}}</i> le {{post.created_on|date:'j F Y'}}</h6>
                             <p>
                                 <a class="btn btn-lg btn-primary" href="{% url 'blog:publish' id=post.id %}" role="button">Publier &raquo;</a>
-                                <a class="btn btn-lg btn-primary" href="#" role="button">Modifier &raquo;</a>
-                                <a class="btn btn-lg btn-primary" href="#" role="button">Supprimer &raquo;</a>
+                                <a class="btn btn-lg btn-primary" href="{% url 'blog:blog_edit' pk=post.id %}" role="button">Modifier &raquo;</a>
+                                <a class="btn btn-lg btn-primary" href="{% url 'blog:blog_delete' pk=post.id %}" role="button">Supprimer &raquo;</a>
                             </p>
                         </article>
                     </div>

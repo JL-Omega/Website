@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -34,12 +35,44 @@ def CreatePost(request):
     return render(request, 'blog/blog_create.html', {'form': form})
 
 
-class UpdatePost(UpdateView):
-    pass
+# class UpdatePost(UpdateView):
+#     model = BlogPost
+#     template_name = 'blog/blog_edit.html'
+#     form_class = BlogPostForm
+#
+#     def get_success_url(self):
+#         return reverse('blog:none_published')
+
+def updatePost(request, pk):
+    post = BlogPost.objects.get(id=pk)
+
+    init_values = {}
+
+    init_values['title'] = post.title
+    init_values['author'] = post.author
+    init_values['last_updated'] = post.last_updated
+    init_values['created_on'] = post.created_on
+    init_values['published'] = post.published
+    init_values['content'] = post.content
+
+    form = BlogPostForm(initial=init_values)
+
+    if request.method == 'POST':
+        form = BlogPostForm(request.POST)
+        form.published = False
+        if form.is_valid():
+            form.save()
+            post.delete()
+            return HttpResponseRedirect(reverse('blog:none_published'))
+    return render(request, 'blog/blog_edit.html', {'form': form})
 
 
-class DeletePost(DeleteView):
-    pass
+def deletePost(request, pk):
+    post = BlogPost.objects.get(id=pk)
+    if request.method == 'POST':
+        post.delete()
+        return HttpResponseRedirect(reverse('blog:blog_list'))
+    return render(request, 'blog/blog_delete.html', {'post': post})
 
 
 class NonePublished(ListView):

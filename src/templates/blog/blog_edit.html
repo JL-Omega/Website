@@ -1,0 +1,23 @@
+{% extends 'website/home.html' %}
+
+{% block content %}
+
+                <div class="container-fluid">
+                    <div class="jumbotron">
+                        <h1>Editer l'article</h1>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <table>
+                                {{form.as_table}}
+                            </table>
+                            {% if error %}
+                            {{error}}
+                            {% endif %}
+                            <p>
+                                <input class="btn btn-lg btn-primary" type="submit" value="Editer &raquo;">
+                            </p>
+                        </form>
+                    </div>
+                </div>
+
+{% endblock %}
