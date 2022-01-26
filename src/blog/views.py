@@ -21,11 +21,9 @@ class DetailPost(DetailView):
 def CreatePost(request):
     if request.method == 'POST':
         form = BlogPostForm(request.POST)
-        post = BlogPost.objects.all()
-        print(post)
-        # if form.is_valid():
-        #     form.save()
-        # return HttpResponseRedirect(request.path)
+        if form.is_valid():
+            form.save()
+        return HttpResponseRedirect(request.path)
 
     else:
         init_values = {}
